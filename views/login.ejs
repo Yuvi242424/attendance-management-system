@@ -1,0 +1,11 @@
+<section class="card">
+  <h2>Teacher Login</h2>
+  <% if (error) { %>
+    <p style="color:#f44336"><%= error %></p>
+  <% } %>
+  <form method="POST" action="/login">
+    <label>Username<br><input name="username" type="text" required></label><br><br>
+    <label>Password<br><input name="password" type="password" required></label><br><br>
+    <button class="btn" type="submit">Login</button>
+  </form>
+</section>

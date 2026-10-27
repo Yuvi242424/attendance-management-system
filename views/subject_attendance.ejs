@@ -1,0 +1,77 @@
+<section class="page-section">
+  <h2>Subject-wise Attendance</h2>
+
+  <form method="POST" action="/attendance/subject" class="card" id="subject-attendance-form">
+    <div style="display:flex; gap:16px; flex-wrap:wrap; margin-bottom:16px; align-items:center;">
+      <!-- Date -->
+      <label>
+        Date:
+        <input type="date" name="date" value="<%= date %>" required>
+      </label>
+
+      <!-- Subject dropdown -->
+      <label>
+        Subject:
+        <select name="subject_id" required>
+          <option value="">-- Select Subject --</option>
+          <% subjects.forEach(function (sub) { %>
+            <option value="<%= sub.id %>">
+              <%= sub.code %> - <%= sub.name %>
+            </option>
+          <% }) %>
+        </select>
+      </label>
+    </div>
+
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Roll No</th>
+          <th>Name</th>
+          <th style="width:80px;">Present</th>
+          <th style="width:80px;">Absent</th>
+          <th style="width:110px;">Not Marked</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% students.forEach(function (s) { %>
+          <tr>
+            <td><%= s.roll_no %></td>
+            <td><%= s.name %></td>
+
+            <!-- Default N for this student; radios with same name override it -->
+            <input type="hidden" name="status[<%= s.id %>]" value="N">
+
+            <td class="center">
+              <input
+                type="radio"
+                name="status[<%= s.id %>]"
+                value="P"
+              >
+            </td>
+            <td class="center">
+              <input
+                type="radio"
+                name="status[<%= s.id %>]"
+                value="A"
+              >
+            </td>
+            <td class="center">
+              <input
+                type="radio"
+                name="status[<%= s.id %>]"
+                value="N"
+                checked
+              >
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <div style="margin-top: 16px; display:flex; gap:8px; flex-wrap:wrap;">
+      <button type="submit" class="btn">Save Subject Attendance</button>
+    </div>
+  </form>
+</section>
+

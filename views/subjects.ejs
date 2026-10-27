@@ -1,0 +1,73 @@
+<section class="page-section">
+  <h2>Subjects</h2>
+
+  <!-- Add Subject Form -->
+  <form action="/subjects/add" method="POST" class="card" style="margin-bottom:16px;">
+    <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap;">
+      
+      <label>
+        Code:
+        <input 
+          type="text" 
+          name="code" 
+          required 
+          placeholder="CS501"
+          style="margin-left:6px;"
+        >
+      </label>
+
+      <label>
+        Name:
+        <input 
+          type="text" 
+          name="name" 
+          required 
+          placeholder="Operating Systems"
+          style="margin-left:6px;"
+        >
+      </label>
+
+      <button type="submit" class="btn">Add Subject</button>
+    </div>
+  </form>
+
+  <!-- Subjects Table -->
+  <div class="card">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Name</th>
+          <th style="width:120px;">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% if (!subjects || subjects.length === 0) { %>
+          <tr>
+            <td colspan="3" style="text-align:center; padding:12px;">
+              No subjects added yet. Add one above.
+            </td>
+          </tr>
+        <% } else { %>
+          <% subjects.forEach(function (s) { %>
+            <tr>
+              <td><%= s.code %></td>
+              <td><%= s.name %></td>
+              <td>
+                <form 
+                  action="/subjects/delete/<%= s.id %>" 
+                  method="POST" 
+                  onsubmit="return confirm('Delete this subject?');"
+                  style="display:inline;"
+                >
+                  <button type="submit" class="btn sm-btn danger-btn">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</section>

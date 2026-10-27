@@ -1,0 +1,56 @@
+<section class="page-section">
+  <h2>Students</h2>
+
+  <!-- Add Student Form -->
+  <form action="/students/add" method="POST" class="card" style="margin-bottom: 16px;">
+    <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+      <label>
+        Roll No:
+        <input type="text" name="roll_no" required>
+      </label>
+
+      <label>
+        Name:
+        <input type="text" name="name" required>
+      </label>
+
+      <button type="submit" class="btn">Add Student</button>
+    </div>
+  </form>
+
+  <!-- Students List -->
+  <div class="card">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Roll No</th>
+          <th>Name</th>
+          <th style="width: 120px;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (students.length === 0) { %>
+          <tr>
+            <td colspan="3" style="text-align:center; padding: 12px;">
+              No students found. Add a student above.
+            </td>
+          </tr>
+        <% } else { %>
+          <% students.forEach(function (s) { %>
+            <tr>
+              <td><%= s.roll_no %></td>
+              <td><%= s.name %></td>
+              <td>
+                <form action="/students/delete/<%= s.id %>" method="POST" onsubmit="return confirm('Delete this student?');">
+                  <button type="submit" class="btn sm-btn danger-btn">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+

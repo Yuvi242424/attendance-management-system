@@ -1,0 +1,12 @@
+<section class="page-section card">
+  <h2>Subject Report - <%= subject.code %> - <%= date %></h2>
+
+  <table class="styled-table">
+    <thead><tr><th>Roll No</th><th>Name</th><th>Status</th></tr></thead>
+    <tbody>
+      <% records.forEach(r => { %>
+        <tr><td><%= r.roll_no %></td><td><%= r.name %></td><td><%= r.status || 'N' %></td></tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>

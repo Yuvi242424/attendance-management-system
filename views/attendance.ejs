@@ -1,0 +1,61 @@
+<section class="page-section">
+  <h2>Daily Attendance</h2>
+
+  <form method="POST" action="/attendance" class="card" id="attendance-form">
+    <div style="margin-bottom: 12px;">
+      <label>
+        Date:
+        <input type="date" name="date" value="<%= date %>" required>
+      </label>
+    </div>
+
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Roll No</th>
+          <th>Name</th>
+          <th style="width:80px;">Present</th>
+          <th style="width:80px;">Absent</th>
+          <th style="width:110px;">Not Marked</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% students.forEach(function (s) { %>
+          <tr>
+            <td><%= s.roll_no %></td>
+            <td><%= s.name %></td>
+
+            <!-- Each student gets exactly ONE value: P / A / N -->
+            <td class="center">
+              <input
+                type="radio"
+                name="status[<%= s.id %>]"
+                value="P"
+              >
+            </td>
+            <td class="center">
+              <input
+                type="radio"
+                name="status[<%= s.id %>]"
+                value="A"
+              >
+            </td>
+            <td class="center">
+              <input
+                type="radio"
+                name="status[<%= s.id %>]"
+                value="N"
+                checked
+              >
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <div style="margin-top: 16px;">
+      <button type="submit" class="btn">Save Attendance</button>
+      <a href="/attendance/report?date=<%= date %>" class="btn sm-btn">View Today’s Report</a>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,66 @@
+<section class="page-section card">
+  <h2>Attendance Report - <%= date %></h2>
+
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>Roll No</th>
+        <th>Name</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (!records || records.length === 0) { %>
+        <tr>
+          <td colspan="3" style="text-align:center; padding: 12px;">
+            No attendance records for this date.
+          </td>
+        </tr>
+      <% } else { %>
+        <% records.forEach(function (r) { %>
+          <tr>
+            <td><%= r.roll_no %></td>
+            <td><%= r.name %></td>
+            <td>
+              <% if (r.status === 'P') { %>
+                P
+              <% } else if (r.status === 'A') { %>
+                A
+              <% } else { %>
+                N
+              <% } %>
+            </td>
+          </tr>
+        <% }) %>
+      <% } %>
+    </tbody>
+  </table>
+
+  <% if (summary && summary.length) { %>
+    <div class="card" style="margin-top:16px;">
+      <h3>Overall Attendance Summary</h3>
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Roll No</th>
+            <th>Name</th>
+            <th>Total Days</th>
+            <th>Present Days</th>
+            <th>Percentage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% summary.forEach(function (s) { %>
+            <tr>
+              <td><%= s.roll_no %></td>
+              <td><%= s.name %></td>
+              <td><%= s.total_days %></td>
+              <td><%= s.present_days %></td>
+              <td><%= s.percentage %> %</td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</section>

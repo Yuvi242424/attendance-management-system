@@ -1,0 +1,1 @@
+This is a simple attendance management system using MySQL as backend, the intention of this project is to demonstrate successful backend connection to MySQL and to demonstrate its data management application.
